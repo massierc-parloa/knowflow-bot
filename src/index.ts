@@ -38,7 +38,7 @@ const handler: Handler = async req => {
     };
   }
 
-  const res = await axios.post(
+  await axios.post(
     'https://knowflow-bot-ask.netlify.app',
     {
       question: payload.text,
@@ -46,8 +46,6 @@ const handler: Handler = async req => {
     },
     { headers: { 'Content-Type': 'application/json' } }
   );
-
-  console.log('res :>> ', res);
 
   return {
     statusCode: 200,
