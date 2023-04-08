@@ -38,7 +38,7 @@ const handler: Handler = async req => {
     };
   }
 
-  await axios.post(
+  void axios.post(
     'https://knowflow-bot-ask.netlify.app',
     {
       question: payload.text,
@@ -46,6 +46,8 @@ const handler: Handler = async req => {
     },
     { headers: { 'Content-Type': 'application/json' } }
   );
+
+  await delay(100);
 
   return {
     statusCode: 200,
@@ -58,3 +60,7 @@ const handler: Handler = async req => {
 };
 
 export { handler };
+
+function delay(time: number) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
