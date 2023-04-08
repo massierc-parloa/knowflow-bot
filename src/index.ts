@@ -21,7 +21,6 @@ type SlashCommandPayload = {
   trigger_id: string;
 };
 
-// eslint-disable-next-line @typescript-eslint/require-await
 const handler: Handler = async req => {
   if (!req.body) return { statusCode: 400 };
 
@@ -47,14 +46,13 @@ const handler: Handler = async req => {
     { headers: { 'Content-Type': 'application/json' } }
   );
 
-  await delay(100);
+  await delay(10);
 
   return {
     statusCode: 200,
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       response_type: 'in_channel',
-      text: 'Sure, just a moment...',
     }),
   };
 };
