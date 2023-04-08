@@ -46,7 +46,7 @@ const handler: Handler = async req => {
     { headers: { 'Content-Type': 'application/json' } }
   );
 
-  await delay(10);
+  await delay(100);
 
   return {
     statusCode: 200,
