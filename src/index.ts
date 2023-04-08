@@ -38,7 +38,7 @@ const handler: Handler = async (req, res) => {
     };
   }
 
-  void axios.post(
+  await axios.post(
     'https://knowflow-bot-ask.netlify.app',
     {
       question: payload.text,
