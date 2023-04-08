@@ -38,6 +38,15 @@ const handler: Handler = async (req, res) => {
     };
   }
 
+  void axios.post(
+    'https://knowflow-bot-ask.netlify.app',
+    {
+      question: payload.text,
+      responseUrl: payload.response_url,
+    },
+    { headers: { 'Content-Type': 'application/json' } }
+  );
+
   return {
     statusCode: 200,
     headers: { 'Content-Type': 'application/json' },
