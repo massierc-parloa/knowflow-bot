@@ -22,10 +22,10 @@ type SlashCommandPayload = {
 };
 
 // eslint-disable-next-line @typescript-eslint/require-await
-const handler: Handler = async ({ body }) => {
-  if (!body) return { statusCode: 400 };
+const handler: Handler = async (req, res) => {
+  if (!req.body) return { statusCode: 400 };
 
-  const payload = parse(body) as SlashCommandPayload;
+  const payload = parse(req.body) as SlashCommandPayload;
 
   if (payload.command !== '/ask-eon') {
     return {
@@ -38,8 +38,6 @@ const handler: Handler = async ({ body }) => {
     };
   }
 
-  void doStuff(payload.text, payload.response_url);
-
   return {
     statusCode: 200,
     headers: { 'Content-Type': 'application/json' },
@@ -51,24 +49,3 @@ const handler: Handler = async ({ body }) => {
 };
 
 export { handler };
-
-function delay(time: number) {
-  return new Promise(resolve => setTimeout(resolve, time));
-}
-
-async function doStuff(_: string, responseUrl: string) {
-  await delay(2000);
-
-  try {
-    await axios.post(
-      responseUrl,
-      {
-        replace_original: 'true',
-        text: 'This should replace the original message',
-      },
-      { headers: { 'Content-Type': 'application/json' } }
-    );
-  } catch (err) {
-    console.log('err :>> ', err);
-  }
-}
