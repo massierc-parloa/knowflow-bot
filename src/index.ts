@@ -22,7 +22,7 @@ type SlashCommandPayload = {
 };
 
 // eslint-disable-next-line @typescript-eslint/require-await
-const handler: Handler = async (req, res) => {
+const handler: Handler = async req => {
   if (!req.body) return { statusCode: 400 };
 
   const payload = parse(req.body) as SlashCommandPayload;
@@ -38,7 +38,7 @@ const handler: Handler = async (req, res) => {
     };
   }
 
-  await axios.post(
+  const res = await axios.post(
     'https://knowflow-bot-ask.netlify.app',
     {
       question: payload.text,
@@ -47,13 +47,15 @@ const handler: Handler = async (req, res) => {
     { headers: { 'Content-Type': 'application/json' } }
   );
 
+  console.log('res :>> ', res);
+
   return {
     statusCode: 200,
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      response_type: 'in_channel',
-      text: 'Sure, just a moment...',
-    }),
+    // headers: { 'Content-Type': 'application/json' },
+    // body: JSON.stringify({
+    //   response_type: 'in_channel',
+    //   text: 'Sure, just a moment...',
+    // }),
   };
 };
 
