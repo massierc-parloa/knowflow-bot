@@ -49,11 +49,11 @@ const handler: Handler = async req => {
 
   return {
     statusCode: 200,
-    // headers: { 'Content-Type': 'application/json' },
-    // body: JSON.stringify({
-    //   response_type: 'in_channel',
-    //   text: 'Sure, just a moment...',
-    // }),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      response_type: 'in_channel',
+      text: 'Sure, just a moment...',
+    }),
   };
 };
 
